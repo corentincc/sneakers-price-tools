@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+python-dotenv = "*"
+discord = "==1.7.3"
+discord-py-slash-command = "==3.0.3"
+
+[dev-packages]
+black = "*"
+
+[requires]
+python_version = "3.10"
