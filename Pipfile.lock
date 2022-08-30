@@ -152,11 +152,11 @@
         },
         "discord.py": {
             "hashes": [
-                "sha256:309146476e986cb8faf038cd5d604d4b3834ef15c2d34df697ce5064bf5cd779",
-                "sha256:aeb186348bf011708b085b2715cf92bbb72c692eb4f59c4c0b488130cc4c4b7e"
+                "sha256:462cd0fe307aef8b29cbfa8dd613e548ae4b2cb581d46da9ac0d46fb6ea19408",
+                "sha256:c6f64db136de0e18e090f6752ea68bdd4ab0a61b82dfe7acecefa22d6477bb0c"
             ],
-            "markers": "python_full_version >= '3.8.0'",
-            "version": "==2.0.1"
+            "markers": "python_full_version >= '3.5.3'",
+            "version": "==1.7.3"
         },
         "frozenlist": {
             "hashes": [

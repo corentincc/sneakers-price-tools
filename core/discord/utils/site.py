@@ -61,29 +61,15 @@ class DiscordSiteUtils:
             match str(reaction[0]):
                 case "0️⃣":
                     sneaker = self.search[0]
-                    sneaker_prices = await site_service.get_prices(
-                        site_service.get_id(sneaker)
-                    )
                 case "1️⃣":
                     sneaker = self.search[1]
-                    sneaker_prices = await site_service.get_prices(
-                        site_service.get_id(sneaker)
-                    )
                 case "2️⃣":
                     sneaker = self.search[2]
-                    sneaker_prices = await site_service.get_prices(
-                        site_service.get_id(sneaker)
-                    )
                 case "3️⃣":
                     sneaker = self.search[3]
-                    sneaker_prices = await site_service.get_prices(
-                        site_service.get_id(sneaker)
-                    )
                 case "4️⃣":
                     sneaker = self.search[4]
-                    sneaker_prices = await site_service.get_prices(
-                        site_service.get_id(sneaker)
-                    )
+            sneaker_prices = await site_service.get_prices(sneaker)
             embed = await embed_builder_service.build_prices_embed(
                 sneaker, sneaker_prices
             )

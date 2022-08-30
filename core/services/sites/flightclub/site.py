@@ -19,15 +19,15 @@ class FlightClubSiteService(AbstractSiteService):
         return response.json().get("results")[:5]
 
     @staticmethod
-    async def get_prices(sneaker_id) -> list:
+    async def get_prices(sneaker) -> list:
 
         response = requests.get(
-            f"https://sell.flightclub.com/api/public/products/{sneaker_id}",
+            f"https://sell.flightclub.com/api/public/products/{sneaker.get('id')}",
         )
 
         prices = []
 
-        for size, price in response.json()["suggestedPrices"].items():
+        for size, price in response.json().get("suggestedPrices").items():
             if price.get("lowestConsignedPriceCents"):
                 price = int(price.get("lowestConsignedPriceCents"))
             else:
@@ -44,7 +44,3 @@ class FlightClubSiteService(AbstractSiteService):
                 )
 
         return prices
-
-    @staticmethod
-    def get_id(sneaker: dict) -> str:
-        return sneaker.get("id")

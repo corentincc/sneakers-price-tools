@@ -5,7 +5,7 @@ from discord import Embed
 from core.services.common.abstract_embed_builder import AbstractEmbedBuilderService
 
 
-class StocksEmbedBuilderService(AbstractEmbedBuilderService):
+class StockxEmbedBuilderService(AbstractEmbedBuilderService):
     @staticmethod
     async def build_sneakers_embed(sneakers) -> Embed:
         text_field1 = ""
@@ -24,7 +24,7 @@ class StocksEmbedBuilderService(AbstractEmbedBuilderService):
 
         embed.add_field(name="id 🪪", value=text_field1, inline=True)
         embed.add_field(name="Sneaker 👟", value=text_field2, inline=True)
-        embed.set_footer(text="Stockx - SneakersPriceTools")
+        embed.set_footer(text="Stockx - SneakersPriceTool")
         return embed
 
     @staticmethod
@@ -45,5 +45,5 @@ class StocksEmbedBuilderService(AbstractEmbedBuilderService):
         embed.set_thumbnail(url=sneaker.get("media").get("imageUrl"))
         embed.add_field(name="Size 👟", value=text_field1, inline=True)
         embed.add_field(name="Payouts 💸", value=text_field2, inline=True)
-        embed.set_footer(text="Stockx - SneakersPriceTools")
+        embed.set_footer(text="Stockx - SneakersPriceTool")
         return embed

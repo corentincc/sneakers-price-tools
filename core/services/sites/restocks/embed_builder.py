@@ -22,7 +22,7 @@ class RestocksEmbedBuilderService(AbstractEmbedBuilderService):
 
         embed.add_field(name="id 🪪", value=text_field1, inline=True)
         embed.add_field(name="Sneaker 👟", value=text_field2, inline=True)
-        embed.set_footer(text="Restocks - SneakersPriceTools")
+        embed.set_footer(text="Restocks - SneakersPriceTool")
         return embed
 
     @staticmethod
@@ -43,5 +43,5 @@ class RestocksEmbedBuilderService(AbstractEmbedBuilderService):
         embed.set_thumbnail(url=sneaker.get("image"))
         embed.add_field(name="Size 👟", value=text_field1, inline=True)
         embed.add_field(name="Payouts 💸", value=text_field2, inline=True)
-        embed.set_footer(text="Restocks - SneakersPriceTools")
+        embed.set_footer(text="Restocks - SneakersPriceTool")
         return embed

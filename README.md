@@ -6,6 +6,7 @@
   * Stockx (highest bid payouts)
   * Restocks (highest resell payouts)
   * FlightClub (highest consignement payouts)
+  * Alias (highest resell payouts)
 
 #### Example :
 
