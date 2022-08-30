@@ -21,13 +21,13 @@ class RestocksSiteService(AbstractSiteService):
         return response.json().get("data")[:5]
 
     @staticmethod
-    async def get_prices(sneaker_id) -> list:
+    async def get_prices(sneaker) -> list:
         if not RestocksAuthService.check_auth_token():
             PrintUtils.print_with_date_warning("auth_token expired")
             RestocksAuthService.init()
 
         response = requests.get(
-            f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-sizes/{sneaker_id}"
+            f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-sizes/{sneaker.get('id')}"
         )
 
         cookies = {"restocks_session": RestocksAuthService.get_auth_token()}
@@ -36,7 +36,7 @@ class RestocksSiteService(AbstractSiteService):
 
         for sizes in response.json():
             sizes_price = requests.get(
-                f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-lowest-price/{sneaker_id}/{sizes.get('id')}",
+                f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-lowest-price/{sneaker.get('id')}/{sizes.get('id')}",
                 cookies=cookies,
             )
             if sizes_price.json() == 0:
@@ -48,7 +48,3 @@ class RestocksSiteService(AbstractSiteService):
                 prices.append({"size": sizes.get("name"), "price": f"{sizes_price}€"})
 
         return prices
-
-    @staticmethod
-    def get_id(sneaker: dict) -> str:
-        return sneaker.get("id")

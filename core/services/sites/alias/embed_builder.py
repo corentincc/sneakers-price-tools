@@ -5,7 +5,7 @@ from discord import Embed
 from core.services.common.abstract_embed_builder import AbstractEmbedBuilderService
 
 
-class StockxEmbedBuilderService(AbstractEmbedBuilderService):
+class AliasEmbedBuilderService(AbstractEmbedBuilderService):
     @staticmethod
     async def build_sneakers_embed(sneakers) -> Embed:
         text_field1 = ""
@@ -13,9 +13,7 @@ class StockxEmbedBuilderService(AbstractEmbedBuilderService):
 
         for i, sneaker in enumerate(sneakers):
             text_field1 += f"{i}\n"
-            text_field2 += (
-                f"{sneaker.get('title')} - {sneaker.get('traits')[0].get('value')}\n"
-            )
+            text_field2 += f"{sneaker.get('name')} - {sneaker.get('sku')}\n"
 
         embed = Embed(
             title="Select a sneaker",
@@ -24,7 +22,7 @@ class StockxEmbedBuilderService(AbstractEmbedBuilderService):
 
         embed.add_field(name="id 🪪", value=text_field1, inline=True)
         embed.add_field(name="Sneaker 👟", value=text_field2, inline=True)
-        embed.set_footer(text="Stockx - SneakersPriceTools")
+        embed.set_footer(text="Alias - SneakersPriceTools")
         return embed
 
     @staticmethod
@@ -37,13 +35,13 @@ class StockxEmbedBuilderService(AbstractEmbedBuilderService):
             text_field2 += f"{price.get('price')}\n"
 
         embed = Embed(
-            title=sneaker.get("title"),
-            url=f"https://www.stockx.com/{sneaker.get('urlKey')}",
+            title=sneaker.get("name"),
+            url=f"https://www.goat.com/sneakers/{sneaker.get('slug')}",
             timestamp=datetime.now(timezone.utc),
         )
 
-        embed.set_thumbnail(url=sneaker.get("media").get("imageUrl"))
+        embed.set_thumbnail(url=sneaker.get("main_picture_url"))
         embed.add_field(name="Size 👟", value=text_field1, inline=True)
         embed.add_field(name="Payouts 💸", value=text_field2, inline=True)
-        embed.set_footer(text="Stockx - SneakersPriceTools")
+        embed.set_footer(text="Alias - SneakersPriceTools")
         return embed

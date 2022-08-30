@@ -24,19 +24,19 @@ class StockxSiteService(AbstractSiteService):
         return response.json().get("Products")[:5]
 
     @staticmethod
-    async def get_prices(sneaker_id) -> list:
+    async def get_prices(sneaker) -> list:
         headers = {
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83",
         }
 
         response = requests.get(
-            f"https://stockx.com/api/products/{sneaker_id}?includes=market,360&currency=EUR&market=FR&country=FR",
+            f"https://stockx.com/api/products/{sneaker.get('id')}?includes=market,360&currency=EUR&market=FR&country=FR",
             headers=headers,
         )
 
         prices = []
 
-        for product in response.json()["Product"]["children"].values():
+        for product in response.json().get("Product").get("children").values():
             price = math.floor(
                 (int(product.get("market").get("highestBid")) * 0.875) - 5
             )
@@ -48,7 +48,3 @@ class StockxSiteService(AbstractSiteService):
             )
 
         return prices
-
-    @staticmethod
-    def get_id(sneaker: dict) -> str:
-        return sneaker.get("id")
