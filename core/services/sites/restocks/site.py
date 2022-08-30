@@ -14,7 +14,7 @@ class RestocksSiteService(AbstractSiteService):
         }
 
         response = requests.get(
-            "https://restocks.net/fr/shop/search",
+            f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/shop/search",
             params=params,
         )
 
@@ -27,7 +27,7 @@ class RestocksSiteService(AbstractSiteService):
             RestocksAuthService.init()
 
         response = requests.get(
-            f"https://restocks.net/fr/product/get-sizes/{sneaker_id}"
+            f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-sizes/{sneaker_id}"
         )
 
         cookies = {"restocks_session": RestocksAuthService.get_auth_token()}
@@ -36,7 +36,7 @@ class RestocksSiteService(AbstractSiteService):
 
         for sizes in response.json():
             sizes_price = requests.get(
-                f"https://restocks.net/fr/product/get-lowest-price/{sneaker_id}/{sizes.get('id')}",
+                f"https://restocks.net/{RestocksAuthService.get_restocks_language()}/product/get-lowest-price/{sneaker_id}/{sizes.get('id')}",
                 cookies=cookies,
             )
             if sizes_price.json() == 0:
