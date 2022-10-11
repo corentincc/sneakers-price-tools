@@ -1,37 +1,29 @@
 import math
 
-import requests
-
 from core.services.common.abstract_site import AbstractSiteService
+from core.services.common.client import ClientService
 
 
 class StockxSiteService(AbstractSiteService):
     @staticmethod
     async def search(sku) -> list:
-        headers = {
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83",
-        }
-
         params = {
             "_search": sku,
             "dataType": "product",
         }
 
-        response = requests.get(
-            "https://stockx.com/api/browse", params=params, headers=headers
-        )
+        s = ClientService.get_session()
+
+        response = s.get("https://stockx.com/api/browse", params=params)
 
         return response.json().get("Products")[:5]
 
     @staticmethod
     async def get_prices(sneaker) -> list:
-        headers = {
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.83",
-        }
+        s = ClientService.get_session()
 
-        response = requests.get(
+        response = s.get(
             f"https://stockx.com/api/products/{sneaker.get('id')}?includes=market,360&currency=EUR&market=FR&country=FR",
-            headers=headers,
         )
 
         prices = []

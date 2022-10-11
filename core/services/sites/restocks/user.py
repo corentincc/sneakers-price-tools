@@ -27,7 +27,7 @@ class RestocksUserService:
         try:
             cls._check_is_init()
         except RuntimeError:
-            PrintUtils.print_with_date_error("Failed to init UserService")
+            PrintUtils.print_with_date_error("Failed to init RestocksUserService")
             quit()
 
     @classmethod
